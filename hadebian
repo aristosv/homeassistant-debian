@@ -1,0 +1,22 @@
+echo updating
+apt-get update > /dev/null 2>&1
+
+echo upgrading
+apt-get -y upgrade > /dev/null 2>&1
+
+echo dist upgrade
+apt-get -y dist-upgrade > /dev/null 2>&1
+
+echo installing prerequisites
+apt-get install -y curl jq avahi-daemon > /dev/null 2>&1
+
+echo installing docker
+curl -fsSL get.docker.com -o get-docker.sh ; sh get-docker.sh > /dev/null 2>&1
+
+echo installing home assistant and hassio
+curl -sL https://raw.githubusercontent.com/home-assistant/hassio-build/master/install/hassio_install | bash -s > /dev/null 2>&1
+
+echo installing portainer
+docker run -d --restart always --name portainer -h portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer > /dev/null 2>&1
+
+echo installation complete
