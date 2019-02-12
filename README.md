@@ -1,14 +1,13 @@
 # homeassistant-debian
 Home Assistant installation on Debian
+
+Run the command below on a clean, minimal installation of Debian Stretch.
 ```
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/homeassistant-debian/master/hadebian)
 ```
-Run the command above on a clean, minimal installation of Debian Stretch.
-
 It will install Home Assistant, including Hass.io in a containerized environment.
 
 After the installation, this is how you can access the web apps:
-
 ```
 Name: home assistant
 Usage: home automation bridge
