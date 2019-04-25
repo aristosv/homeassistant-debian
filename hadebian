@@ -14,7 +14,7 @@ echo installing docker
 curl -fsSL get.docker.com -o get-docker.sh ; sh get-docker.sh > /dev/null 2>&1
 
 echo installing home assistant and hassio
-curl -sL https://raw.githubusercontent.com/home-assistant/hassio-build/master/install/hassio_install | bash -s > /dev/null 2>&1
+curl -sL https://raw.githubusercontent.com/home-assistant/hassio-installer/master/hassio_install.sh | bash -s > /dev/null 2>&1
 
 echo installing portainer
 docker run -d --restart always --name portainer -h portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer > /dev/null 2>&1
