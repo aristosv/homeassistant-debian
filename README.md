@@ -16,5 +16,5 @@ URL: http://<your_pi_ip_here>:8123
 ```
 Name: portainer
 Usage: docker container management
-URL: http://<your_pi_ip_here>:9000
+URL: http://<your_server_ip_here>:9000
 ```
