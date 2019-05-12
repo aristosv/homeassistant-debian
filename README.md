@@ -11,7 +11,7 @@ After the installation, this is how you can access the web apps:
 ```
 Name: home assistant
 Usage: home automation bridge
-URL: http://<your_pi_ip_here>:8123
+URL: http://<your_server_ip_here>:8123
 ```
 ```
 Name: portainer
