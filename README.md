@@ -1,7 +1,7 @@
 # homeassistant-debian
 Home Assistant installation on Debian
 
-Run the command below on a clean, minimal installation of Debian Stretch.
+Run the command below on a clean, minimal installation of Debian Buster.
 ```
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/homeassistant-debian/master/hadebian)
 ```
