@@ -1,22 +1,42 @@
-echo updating
-apt-get update > /dev/null 2>&1
+#!/bin/bash
 
-echo upgrading
-apt-get -y upgrade > /dev/null 2>&1
+echo updating repositories
+apt update
 
-echo dist upgrade
-apt-get -y dist-upgrade > /dev/null 2>&1
+echo upgrading system
+apt -y upgrade
 
-echo installing prerequisites
-apt-get install -y curl jq avahi-daemon > /dev/null 2>&1
+echo installing docker prerequisites
+apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+
+echo adding docker key
+curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - 
+
+echo adding docker repositories
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+
+echo updating repositories
+apt update
 
 echo installing docker
-curl -fsSL get.docker.com -o get-docker.sh ; sh get-docker.sh > /dev/null 2>&1
+apt install -y docker-ce docker-ce-cli containerd.io
+
+echo creating containers user
+adduser --disabled-password --gecos '' containers
+
+echo changing containers user password
+echo containers:containers | chpasswd
+
+echo adding containers user to containers group
+usermod -aG docker containers
+
+echo installing additional docker prerequisites
+apt-get install -y curl jq avahi-daemon
 
 echo installing home assistant and hassio
-curl -sL https://raw.githubusercontent.com/home-assistant/hassio-installer/master/hassio_install.sh | bash -s > /dev/null 2>&1
+curl -sL https://raw.githubusercontent.com/home-assistant/hassio-installer/master/hassio_install.sh | bash -s
 
 echo installing portainer
-docker run -d --restart always --name portainer -h portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer > /dev/null 2>&1
+docker run -d --restart always --name portainer -h portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer
 
 echo installation complete
